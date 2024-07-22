@@ -17,17 +17,27 @@ val Pretendard = FontFamily(
   Font(R.font.pretendard_font_700, FontWeight.W700)
 )
 
-// 다양한 텍스트 스타일 정의
-val AppTypography = Typography(
-  bodyLarge = TextStyle(
+data class CustomTextStyle(
+  val title: TextStyle,
+  val body: TextStyle,
+  val label: TextStyle
+)
+
+val appTextStyles = CustomTextStyle(
+  title = TextStyle(
     fontFamily = Pretendard,
-    fontWeight = FontWeight.Normal,
+    fontWeight = FontWeight.W700,
+    fontSize = 24.sp
+  ),
+  body = TextStyle(
+    fontFamily = Pretendard,
+    fontWeight = FontWeight.W500,
     fontSize = 16.sp
   ),
-  labelLarge = TextStyle(
+  label = TextStyle(
     fontFamily = Pretendard,
-    fontWeight = FontWeight.Bold,
-    fontSize = 14.sp
-  ),
-  // 추가 텍스트 스타일 설정
+    fontWeight = FontWeight.W400,
+    fontSize = 20.sp
+  )
+
 )
