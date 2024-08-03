@@ -10,6 +10,24 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.tapie.eclair_card.R
 
 @Composable
+fun LogoIcon(modifier: Modifier = Modifier) {
+  Image(
+    painter = painterResource(id = R.drawable.logo),
+    contentDescription = null,
+    modifier = modifier
+  )
+}
+
+@Composable
+fun LoadingIcon(modifier: Modifier = Modifier) {
+  Image(
+    painter = painterResource(id = R.drawable.loading),
+    contentDescription = null,
+    modifier = modifier
+  )
+}
+
+@Composable
 fun HomeIcon(modifier: Modifier = Modifier) {
   Image(
     painter = painterResource(id = R.drawable.home),
@@ -122,6 +140,8 @@ fun FutureChoseIcon(modifier: Modifier= Modifier){
 @Composable
 fun IconPreview() {
   Column {
+    LogoIcon()
+    LoadingIcon()
     HomeIcon()
     HomeChosenIcon()
     LuckIcon()
