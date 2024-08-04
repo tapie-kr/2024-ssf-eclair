@@ -34,7 +34,7 @@ data class ButtonProps(
 
 
 @Composable
-fun CenteredTextButton(props: ButtonProps, onClick: () -> Unit) {
+fun CenteredTextButton(props: ButtonProps, onClick: () -> Unit, modifier: Modifier = Modifier) {
   Button(
     onClick = onClick,
     modifier = Modifier
