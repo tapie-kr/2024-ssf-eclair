@@ -12,6 +12,7 @@ import com.tapie.eclair_card.components.atomic.CenteredTextButton
 import com.tapie.eclair_card.components.atomic.CustomTextInput
 import com.tapie.eclair_card.components.atomic.ButtonProps
 import com.tapie.eclair_card.components.atomic.typography.StartTypography
+import com.tapie.eclair_card.ui.theme.BlackColor
 
 @Composable
 fun StartingScreen(navController: NavController) {
@@ -21,14 +22,22 @@ fun StartingScreen(navController: NavController) {
     val screenWidth = configuration.screenWidthDp.dp
     val screenHeight = configuration.screenHeightDp.dp
 
-    val textWidth = screenWidth * 345 / 393
-    val textHeight = screenHeight * 29 / 852
-    val inputWidth = screenWidth * 345 / 393
-    val inputHeight = screenHeight * 50 / 852
-    val buttonWidth = screenWidth * 345 / 393
-    val buttonHeight = screenHeight * 53 / 852
+    // 기준 화면 크기
+    val baseWidth = 393.dp
+    val baseHeight = 852.dp
 
-    val spacing = screenHeight * 24 / 852
+    // 현재 화면 크기에 대한 비율 계산
+    val widthRatio = screenWidth / baseWidth
+    val heightRatio = screenHeight / baseHeight
+
+    // 비율에 맞게 크기 조정
+    val textWidth = 345.dp * widthRatio
+    val textHeight = 29.dp * heightRatio
+    val inputWidth = 345.dp * widthRatio
+    val inputHeight = 50.dp * heightRatio
+    val buttonWidth = 345.dp * widthRatio
+    val buttonHeight = 53.dp * heightRatio
+    val spacing = 24.dp * heightRatio
 
     Column(
         modifier = Modifier
@@ -39,22 +48,24 @@ fun StartingScreen(navController: NavController) {
     ) {
         Text(
             text = "당신의 이름을 알려주세요.",
-            style = StartTypography.labelLarge,
+            style = StartTypography.Name,
             modifier = Modifier
                 .width(textWidth)
+                .height(textHeight)
                 .padding(bottom = spacing)
         )
 
         CustomTextInput(
+            value = name,
+            onValueChange = { name = it },
             hint = "이름",
-            onTextChanged = { name = it },
+            hintStyle = StartTypography.Input, // hint 스타일 지정
+            textColor = BlackColor,
             modifier = Modifier
                 .width(inputWidth)
                 .height(inputHeight)
                 .padding(vertical = spacing)
         )
-
-        //여기 아직 안 됨 text가 안 보임
 
         CenteredTextButton(
             props = ButtonProps(

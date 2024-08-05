@@ -7,9 +7,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -24,12 +24,13 @@ import com.tapie.eclair_card.ui.theme.BlackColor
 @Composable
 fun CustomTextInput(
   modifier: Modifier = Modifier,
+  value: String,
+  onValueChange: (String) -> Unit,
   hint: String = "",
-  backgroundColor: Color = Color(0xFFDCDCDC),
-  onTextChanged: (String) -> Unit
+  hintStyle: TextStyle = TextStyle(color = Color.Gray),
+  textColor: Color = BlackColor,
+  backgroundColor: Color = Color(0xFFDCDCDC)
 ) {
-  val textState = remember { mutableStateOf(TextFieldValue()) }
-
   Box(
     modifier = modifier
       .background(color = backgroundColor, shape = RoundedCornerShape(8.dp))
@@ -37,32 +38,21 @@ fun CustomTextInput(
       .fillMaxWidth()
   ) {
     OutlinedTextField(
-      value = textState.value,
+      value = value,
       onValueChange = {
-        textState.value = it
-        onTextChanged(it.text)
-        Log.d("CustomTextInput", "Input: ${it.text}") // 로그 출력
-        println("Input: ${it.text}") // println으로 출력
+        onValueChange(it)
+        Log.d("CustomTextInput", "Input: $it")
+        println("Input: $it")
       },
-      textStyle = TextStyle(color = BlackColor),
-      placeholder = { Text(text = hint, color = Color.Gray) },
+      textStyle = TextStyle(color = textColor),
+      placeholder = { Text(text = hint, style = hintStyle) },
       colors = TextFieldDefaults.outlinedTextFieldColors(
         focusedBorderColor = Color.Transparent,
         unfocusedBorderColor = Color.Transparent,
         containerColor = Color.White,
-        cursorColor = BlackColor,
-        focusedTextColor = BlackColor,
-        unfocusedTextColor = BlackColor
+        cursorColor = textColor,
       ),
       modifier = Modifier.fillMaxWidth()
     )
-
-    if (textState.value.text.isEmpty()) {
-      Text(
-        text = hint,
-        style = TextStyle(color = Color.Gray),
-        modifier = Modifier.padding(start = 4.dp, top = 8.dp)
-      )
-    }
   }
 }
