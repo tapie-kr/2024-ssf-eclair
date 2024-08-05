@@ -7,16 +7,13 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import com.tapie.eclair_card.ui.theme.BlackColor
 
@@ -34,7 +31,7 @@ fun CustomTextInput(
   Box(
     modifier = modifier
       .background(color = backgroundColor, shape = RoundedCornerShape(8.dp))
-      .padding(8.dp)
+      //.padding(8.dp)
       .fillMaxWidth()
   ) {
     OutlinedTextField(
@@ -42,14 +39,13 @@ fun CustomTextInput(
       onValueChange = {
         onValueChange(it)
         Log.d("CustomTextInput", "Input: $it")
-        println("Input: $it")
       },
       textStyle = TextStyle(color = textColor),
       placeholder = { Text(text = hint, style = hintStyle) },
       colors = TextFieldDefaults.outlinedTextFieldColors(
         focusedBorderColor = Color.Transparent,
         unfocusedBorderColor = Color.Transparent,
-        containerColor = Color.White,
+        containerColor = backgroundColor,
         cursorColor = textColor,
       ),
       modifier = Modifier.fillMaxWidth()

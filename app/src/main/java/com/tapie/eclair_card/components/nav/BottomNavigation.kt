@@ -1,36 +1,33 @@
 package com.tapie.eclair_card.components.nav
 
-import androidx.compose.foundation.Image
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.tapie.eclair_card.R
 import com.tapie.eclair_card.components.atomic.*
 
 data class BottomNavItem(
     val name: String,
     val route: String,
     val icon: @Composable (Modifier) -> Unit,
-    val selectedIcon: @Composable (Modifier) -> Unit
+    val selectedIcon: @Composable (Modifier) -> Unit,
+    val label : String
 )
 
 @Composable
 fun BottomNavigationBar(navController: NavController) {
     val items = listOf(
-        BottomNavItem("Taro", "taro", { TaroIcon(it) }, { TaroChosenIcon(it) }),
-        BottomNavItem("Home", "home", { HomeIcon(it) }, { HomeChosenIcon(it) }),
-        BottomNavItem("Luck", "luck", { LuckIcon(it) }, { LuckChosenIcon(it) })
+        BottomNavItem("Taro", "taro", { TaroIcon(it) }, { TaroChosenIcon(it) }, "타로"),
+        BottomNavItem("Home", "home", { HomeIcon(it) }, { HomeChosenIcon(it) }, "홈"),
+        BottomNavItem("Luck", "luck", { LuckIcon(it) }, { LuckChosenIcon(it) }, "운세")
     )
 
-    NavigationBar {
+    NavigationBar(
+        containerColor = Color.White // 배경색을 흰색으로 설정
+    ) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentRoute = navBackStackEntry?.destination?.route
 
@@ -43,7 +40,7 @@ fun BottomNavigationBar(navController: NavController) {
                         item.icon(Modifier)
                     }
                 },
-                label = { Text(item.name) },
+                label = { Text(item.label) }, // 라벨 추가
                 selected = currentRoute == item.route,
                 onClick = {
                     navController.navigate(item.route) {

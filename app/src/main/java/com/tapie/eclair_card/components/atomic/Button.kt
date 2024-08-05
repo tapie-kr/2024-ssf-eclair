@@ -19,6 +19,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -37,17 +38,18 @@ data class ButtonProps(
 fun CenteredTextButton(props: ButtonProps, onClick: () -> Unit, modifier: Modifier = Modifier) {
   Button(
     onClick = onClick,
-    modifier = Modifier
+    modifier = modifier
       .padding(vertical = 4.dp)
       .size(width = props.buttonWidth.dp, height = props.buttonHeight.dp),
     colors = ButtonDefaults.buttonColors(containerColor = GreenColor),
-    shape = RoundedCornerShape(8.dp)
+    shape = androidx.compose.foundation.shape.RoundedCornerShape(8.dp)
   ) {
     Text(
       text = props.text,
       style = TextStyle(
-        color = Color.White,
-        fontSize = 16.sp
+        color = Color.Black,
+        fontSize = 18.sp, // 버튼 텍스트 크기
+        fontWeight = FontWeight.W600
       )
     )
   }

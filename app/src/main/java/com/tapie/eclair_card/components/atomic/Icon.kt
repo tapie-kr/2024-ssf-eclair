@@ -2,11 +2,13 @@ package com.tapie.eclair_card.components.atomic
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.focusModifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.tapie.eclair_card.R
 
 @Composable
@@ -14,7 +16,7 @@ fun LogoIcon(modifier: Modifier = Modifier) {
   Image(
     painter = painterResource(id = R.drawable.logo),
     contentDescription = null,
-    modifier = modifier
+    modifier = modifier.size(30.dp)
   )
 }
 
@@ -23,7 +25,7 @@ fun LoadingIcon(modifier: Modifier = Modifier) {
   Image(
     painter = painterResource(id = R.drawable.loading),
     contentDescription = null,
-    modifier = modifier
+    modifier = modifier.size(30.dp)
   )
 }
 
@@ -32,7 +34,7 @@ fun HomeIcon(modifier: Modifier = Modifier) {
   Image(
     painter = painterResource(id = R.drawable.home),
     contentDescription = null,
-    modifier = modifier
+    modifier = modifier.size(30.dp)
   )
 }
 
@@ -41,7 +43,7 @@ fun HomeChosenIcon(modifier: Modifier = Modifier) {
   Image(
     painter = painterResource(id = R.drawable.home_chose),
     contentDescription = null,
-    modifier = modifier
+    modifier = modifier.size(30.dp)
   )
 }
 
@@ -50,7 +52,7 @@ fun LuckIcon(modifier: Modifier = Modifier) {
   Image(
     painter = painterResource(id = R.drawable.luck),
     contentDescription = null,
-    modifier = modifier
+    modifier = modifier.size(30.dp)
   )
 }
 
@@ -59,7 +61,7 @@ fun LuckChosenIcon(modifier: Modifier = Modifier) {
   Image(
     painter = painterResource(id = R.drawable.luck_chose),
     contentDescription = null,
-    modifier = modifier
+    modifier = modifier.size(30.dp)
   )
 }
 
@@ -68,7 +70,7 @@ fun TaroIcon(modifier: Modifier = Modifier) {
   Image(
     painter = painterResource(id = R.drawable.taro),
     contentDescription = null,
-    modifier = modifier
+    modifier = modifier.size(30.dp)
   )
 }
 
@@ -77,7 +79,7 @@ fun TaroChosenIcon(modifier: Modifier = Modifier) {
   Image(
     painter = painterResource(id = R.drawable.taro_chose),
     contentDescription = null,
-    modifier = modifier
+    modifier = modifier.size(30.dp)
   )
 }
 
@@ -87,7 +89,7 @@ fun PastIcon(modifier: Modifier= Modifier){
   Image(
     painter = painterResource(id = R.drawable.past),
     contentDescription = null,
-    modifier = modifier
+    modifier = modifier.size(30.dp)
   )
 }
 
@@ -96,7 +98,7 @@ fun PastChoseIcon(modifier: Modifier= Modifier){
   Image(
     painter = painterResource(id = R.drawable.past_chose),
     contentDescription = null,
-    modifier = modifier
+    modifier = modifier.size(30.dp)
   )
 }
 
@@ -105,7 +107,7 @@ fun PresentIcon(modifier: Modifier= Modifier){
   Image(
     painter = painterResource(id = R.drawable.present),
     contentDescription = null,
-    modifier = modifier
+    modifier = modifier.size(30.dp)
   )
 }
 
@@ -114,7 +116,7 @@ fun PresentChoseIcon(modifier: Modifier= Modifier){
   Image(
     painter = painterResource(id = R.drawable.present_chose),
     contentDescription = null,
-    modifier = modifier
+    modifier = modifier.size(30.dp)
   )
 }
 
@@ -123,7 +125,7 @@ fun FutureIcon(modifier: Modifier= Modifier){
   Image(
     painter = painterResource(id = R.drawable.future),
     contentDescription = null,
-    modifier = modifier
+    modifier = modifier.size(30.dp)
   )
 }
 
@@ -132,7 +134,7 @@ fun FutureChoseIcon(modifier: Modifier= Modifier){
   Image(
     painter = painterResource(id = R.drawable.future_chose),
     contentDescription = null,
-    modifier = modifier
+    modifier = modifier.size(30.dp)
   )
 }
 

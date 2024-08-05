@@ -1,83 +1,85 @@
 package com.tapie.eclair_card.fragment.starting
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.tapie.eclair_card.components.atomic.CenteredTextButton
 import com.tapie.eclair_card.components.atomic.CustomTextInput
 import com.tapie.eclair_card.components.atomic.ButtonProps
 import com.tapie.eclair_card.components.atomic.typography.StartTypography
-import com.tapie.eclair_card.ui.theme.BlackColor
+import com.tapie.eclair_card.navigation.Screen
+import kotlinx.coroutines.delay
 
 @Composable
-fun StartingScreen(navController: NavController) {
+fun StartingScreen(navController: NavController, userName: MutableState<String>) {
     var name by remember { mutableStateOf("") }
+    var visible by remember { mutableStateOf(true) }
+    var navigateToHome by remember { mutableStateOf(false) }
 
-    val configuration = LocalConfiguration.current
-    val screenWidth = configuration.screenWidthDp.dp
-    val screenHeight = configuration.screenHeightDp.dp
+    LaunchedEffect(navigateToHome) {
+        if (navigateToHome) {
+            delay(500)
+            userName.value = name
+            navController.navigate(Screen.Home.route)
+        }
+    }
 
-    // 기준 화면 크기
-    val baseWidth = 393.dp
-    val baseHeight = 852.dp
-
-    // 현재 화면 크기에 대한 비율 계산
-    val widthRatio = screenWidth / baseWidth
-    val heightRatio = screenHeight / baseHeight
-
-    // 비율에 맞게 크기 조정
-    val textWidth = 345.dp * widthRatio
-    val textHeight = 29.dp * heightRatio
-    val inputWidth = 345.dp * widthRatio
-    val inputHeight = 50.dp * heightRatio
-    val buttonWidth = 345.dp * widthRatio
-    val buttonHeight = 53.dp * heightRatio
-    val spacing = 24.dp * heightRatio
-
-    Column(
+    Box(
         modifier = Modifier
             .fillMaxSize()
-            .padding(horizontal = (screenWidth - textWidth) / 2), // 수평 여백 조정
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+            .padding(16.dp),
+        contentAlignment = Alignment.Center
     ) {
-        Text(
-            text = "당신의 이름을 알려주세요.",
-            style = StartTypography.Name,
-            modifier = Modifier
-                .width(textWidth)
-                .height(textHeight)
-                .padding(bottom = spacing)
-        )
+        AnimatedVisibility(
+            visible = visible,
+            enter = fadeIn(animationSpec = tween(1000)),
+            exit = fadeOut(animationSpec = tween(500))
+        ) {
+            Column(
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    text = "당신의 이름을 알려주세요.",
+                    style = StartTypography.Name,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 18.dp)
+                )
 
-        CustomTextInput(
-            value = name,
-            onValueChange = { name = it },
-            hint = "이름",
-            hintStyle = StartTypography.Input, // hint 스타일 지정
-            textColor = BlackColor,
-            modifier = Modifier
-                .width(inputWidth)
-                .height(inputHeight)
-                .padding(vertical = spacing)
-        )
+                CustomTextInput(
+                    value = name,
+                    onValueChange = { name = it },
+                    hint = "이름",
+                    hintStyle = StartTypography.Input,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 18.dp)
+                )
 
-        CenteredTextButton(
-            props = ButtonProps(
-                text = "완료",
-                icon = null,
-                buttonHeight = buttonHeight.value.toInt(),
-                buttonWidth = buttonWidth.value.toInt()
-            ),
-            onClick = {
-                navController.navigate("home")
-            },
-            modifier = Modifier.padding(vertical = spacing)
-        )
+                CenteredTextButton(
+                    props = ButtonProps(
+                        text = "완료",
+                        icon = null,
+                        buttonHeight = 53, // 버튼의 높이 조정
+                        buttonWidth = 345 // 버튼의 너비 조정
+                    ),
+                    onClick = {
+                        if (name.isNotEmpty()) {
+                            visible = false
+                            navigateToHome = true
+                        }
+                    }
+                )
+            }
+        }
     }
 }
