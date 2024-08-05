@@ -8,33 +8,42 @@ import androidx.compose.ui.unit.sp
 import com.tapie.eclair_card.components.atomic.Pretendard
 
 
-val TarotTypography = Typography(
-    displayLarge = TextStyle(
-        fontFamily = Pretendard,
-        fontWeight = FontWeight.W600,
-        fontSize = 16.sp
-    ),
-    displayMedium = TextStyle(
-        fontFamily = Pretendard,
-        fontWeight = FontWeight.W400,
-        fontSize = 14.sp
-    ),
-    displaySmall = TextStyle(
+data class CustomTaroTypography(
+    val Taro: TextStyle,
+    val Explain: TextStyle,
+    val Choose : TextStyle,
+    val Button : TextStyle,
+    val Time : TextStyle,
+    val TaroExplain : TextStyle
+)
+
+val TaroTypography = CustomTaroTypography(
+    Taro = TextStyle(
+       fontFamily = Pretendard,
+       fontWeight = FontWeight.W600,
+       fontSize = 16.sp
+   ),
+    Explain = TextStyle(
+       fontFamily = Pretendard,
+       fontWeight = FontWeight.W400,
+       fontSize = 14.sp
+   ),
+    Choose = TextStyle(
         fontFamily = Pretendard,
         fontWeight = FontWeight.W400,
         fontSize = 20.sp
     ),
-    headlineMedium = TextStyle(
+    Button = TextStyle(
         fontFamily = Pretendard,
         fontWeight = FontWeight.W600,
         fontSize = 18.sp
     ),
-    headlineLarge = TextStyle(
+    Time = TextStyle(
         fontFamily = Pretendard,
         fontWeight = FontWeight.W700,
         fontSize = 24.sp
     ),
-    bodyLarge = TextStyle(
+    TaroExplain = TextStyle(
         fontFamily = Pretendard,
         fontWeight = FontWeight.W400,
         fontSize = 20.sp

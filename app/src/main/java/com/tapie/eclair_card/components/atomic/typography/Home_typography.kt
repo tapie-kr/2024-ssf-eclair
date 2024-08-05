@@ -14,65 +14,53 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.tapie.eclair_card.components.atomic.Pretendard
+import org.w3c.dom.Text
 
-val HomeTypography = Typography(
-    displayLarge = TextStyle(
+data class CustomHomeTypography(
+    val Name: TextStyle,
+    val Title: TextStyle,
+    val Todayluck : TextStyle,
+    val Luck : TextStyle,
+    val Luckname : TextStyle,
+    val Body: TextStyle,
+    val Button: TextStyle
+)
+
+val HomeTypography = CustomHomeTypography(
+    Name = TextStyle(
         fontFamily = Pretendard,
         fontWeight = FontWeight.W700,
         fontSize = 24.sp
     ),
-    displayMedium = TextStyle(
+    Title = TextStyle(
         fontFamily = Pretendard,
         fontWeight = FontWeight.W600,
-        fontSize = 24.sp
+        fontSize = 20.sp
     ),
-    displaySmall = TextStyle(
+    Todayluck = TextStyle(
         fontFamily = Pretendard,
         fontWeight = FontWeight.W500,
         fontSize = 20.sp
     ),
-    headlineMedium = TextStyle(
+    Luck = TextStyle(
         fontFamily = Pretendard,
         fontWeight = FontWeight.W600,
         fontSize = 18.sp
     ),
-    titleLarge = TextStyle(
+    Luckname = TextStyle(
         fontFamily = Pretendard,
         fontWeight = FontWeight.W500,
         fontSize = 16.sp
     ),
-    titleMedium = TextStyle(
+    Body = TextStyle(
         fontFamily = Pretendard,
-        fontWeight = FontWeight.W400,
+        fontWeight = FontWeight.W500,
         fontSize = 16.sp
     ),
-    titleSmall = TextStyle(
-        fontFamily = Pretendard,
-        fontWeight = FontWeight.W600,
-        fontSize = 18.sp
-    ),
-    labelLarge = TextStyle(
+    Button = TextStyle(
         fontFamily = Pretendard,
         fontWeight = FontWeight.W600,
         fontSize = 18.sp
     )
 )
 
-
-//@Preview(showBackground = true)
-//@Composable
-//fun HomeTypographyPreview() {
-//    MaterialTheme(typography = HomeTypography) {
-//        Surface(modifier = Modifier.padding(16.dp)) {
-//            Column {
-//                Text(text = "김선린님", style = HomeTypography.displayLarge)
-//                Text(text = "오늘의 운세를 알아보세요", style = HomeTypography.displayMedium)
-//                Text(text = "오늘의 운세", style = HomeTypography.displaySmall)
-//                Text(text = "총운/운 이름", style = HomeTypography.headlineMedium)
-//                Text(text = "전화위복", style = HomeTypography.titleLarge)
-//                Text(text = "운 설명", style = HomeTypography.titleMedium)
-//                Text(text = "버튼", style = HomeTypography.labelLarge)
-//            }
-//        }
-//    }
-//}
