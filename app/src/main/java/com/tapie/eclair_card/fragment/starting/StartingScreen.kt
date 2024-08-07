@@ -10,43 +10,35 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.tapie.eclair_card.components.atomic.CenteredTextButton
 import com.tapie.eclair_card.components.atomic.CustomTextInput
 import com.tapie.eclair_card.components.atomic.ButtonProps
 import com.tapie.eclair_card.components.atomic.typography.StartTypography
 import com.tapie.eclair_card.navigation.Screen
+import com.tapie.eclair_card.data.SharedViewModel
 import kotlinx.coroutines.delay
 
 @Composable
-fun StartingScreen(navController: NavController, userName: MutableState<String>) {
+fun StartingScreen(navController: NavController, sharedViewModel: SharedViewModel = viewModel()) {
     var name by remember { mutableStateOf("") }
+    var birthDate by remember { mutableStateOf("") }
     var visible by remember { mutableStateOf(true) }
-    var navigateToHome by remember { mutableStateOf(false) }
 
-    LaunchedEffect(navigateToHome) {
-        if (navigateToHome) {
-            delay(500)
-            userName.value = name
-            navController.navigate(Screen.Home.route)
-        }
-    }
-
-    Box(
+    Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp),
-        contentAlignment = Alignment.Center
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         AnimatedVisibility(
             visible = visible,
             enter = fadeIn(animationSpec = tween(1000)),
             exit = fadeOut(animationSpec = tween(500))
         ) {
-            Column(
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
+            Column {
                 Text(
                     text = "당신의 이름을 알려주세요.",
                     style = StartTypography.Name,
@@ -56,9 +48,19 @@ fun StartingScreen(navController: NavController, userName: MutableState<String>)
                 )
 
                 CustomTextInput(
+                    hint = "이름",
                     value = name,
                     onValueChange = { name = it },
-                    hint = "이름",
+                    hintStyle = StartTypography.Input,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 18.dp)
+                )
+
+                CustomTextInput(
+                    hint = "생년월일 (숫자만 써주세요)",
+                    value = birthDate,
+                    onValueChange = { birthDate = it },
                     hintStyle = StartTypography.Input,
                     modifier = Modifier
                         .fillMaxWidth()
@@ -69,13 +71,15 @@ fun StartingScreen(navController: NavController, userName: MutableState<String>)
                     props = ButtonProps(
                         text = "완료",
                         icon = null,
-                        buttonHeight = 53, // 버튼의 높이 조정
-                        buttonWidth = 345 // 버튼의 너비 조정
+                        buttonHeight = 53,
+                        buttonWidth = 345
                     ),
                     onClick = {
-                        if (name.isNotEmpty()) {
+                        if (name.isNotEmpty() && birthDate.isNotEmpty()) {
                             visible = false
-                            navigateToHome = true
+                            sharedViewModel.setUserName(name)
+                            sharedViewModel.setBirthDate(birthDate)
+                            navController.navigate(Screen.Loading.route)
                         }
                     }
                 )

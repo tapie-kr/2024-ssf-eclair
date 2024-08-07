@@ -48,6 +48,10 @@ android {
 
 dependencies {
 
+  implementation("com.squareup.retrofit2:retrofit:2.9.0")
+  implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2")
+
   implementation(libs.androidx.core.ktx)
   implementation(libs.androidx.lifecycle.runtime.ktx)
   implementation(libs.androidx.activity.compose)
@@ -58,6 +62,7 @@ dependencies {
   implementation(libs.androidx.material3)
   implementation(libs.androidx.navigation.runtime.ktx)
   implementation ("androidx.navigation:navigation-compose:2.4.0-alpha10")
+  implementation(libs.androidx.runtime.livedata)
   testImplementation(libs.junit)
   androidTestImplementation(libs.androidx.junit)
   androidTestImplementation(libs.androidx.espresso.core)
