@@ -28,7 +28,6 @@ import com.tapie.eclair_card.ui.theme.GreenColor
 
 data class ButtonProps(
   val text: String,
-  val icon: Int?,
   val buttonHeight: Int,
   val buttonWidth: Int
 )
@@ -73,15 +72,14 @@ fun LeftTextRightIconButton(props: ButtonProps, onClick: () -> Unit) {
         text = props.text,
         style = TextStyle(
           color = Color.Black,
-          fontSize = 16.sp
+          fontSize = 16.sp,
+          fontWeight = FontWeight.W600
         )
       )
-      props.icon?.let {
-        Image(
-          painter = painterResource(id = it),
-          contentDescription = null
-        )
-      }
+      Image(
+        painter = painterResource(id = R.drawable.arrow_forward_ios),
+        contentDescription = null
+      )
     }
   }
 }

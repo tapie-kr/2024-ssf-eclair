@@ -16,12 +16,27 @@ class SharedViewModel : ViewModel() {
     private val _birthDate = MutableLiveData<String>()
     val birthDate: LiveData<String> get() = _birthDate
 
-    private val _horoscope = MutableLiveData<String>()
-    val horoscope: LiveData<String> get() = _horoscope
+    private val _todayLuck = MutableLiveData<String>()
+    val todayLuck: LiveData<String> get() = _todayLuck
+
+    private val _loveLuck = MutableLiveData<String>()
+    val loveLuck: LiveData<String> get() = _loveLuck
+
+    private val _wealthLuck = MutableLiveData<String>()
+    val wealthLuck: LiveData<String> get() = _wealthLuck
+
+    private val _healthLuck = MutableLiveData<String>()
+    val healthLuck: LiveData<String> get() = _healthLuck
+
+    private val _num = MutableLiveData<String>()
+    val num: LiveData<String> get() = _num
+
+    private val _fourIdioms = MutableLiveData<String>()
+    val fourIdioms: LiveData<String> get() = _fourIdioms
 
     fun setUserName(name: String) {
-        _userName.value = name
-        Log.d("SharedViewModel", "UserName set to: $name")
+        _userName.value = name.trim() // Trim any whitespace
+        Log.d("SharedViewModel", "UserName set to: ${_userName.value}")
     }
 
     fun setBirthDate(date: String) {
@@ -35,9 +50,28 @@ class SharedViewModel : ViewModel() {
             val birthdate = _birthDate.value ?: ""
             Log.d("SharedViewModel", "Fetching horoscope for: $name, $birthdate")
             val result = getLuck(name, birthdate)
-            _horoscope.value = result
+
+            parseHoroscope(result)
             Log.d("SharedViewModel", "Horoscope fetched: $result")
             onComplete()
         }
+    }
+
+    private fun parseHoroscope(horoscope: String) {
+        val todayLuckMatch = Regex("- 오늘의 운세: (.*)").find(horoscope)
+        val loveLuckMatch = Regex("- 애정운: (.*)").find(horoscope)
+        val wealthLuckMatch = Regex("- 재물운: (.*)").find(horoscope)
+        val healthLuckMatch = Regex("- 건강운: (.*)").find(horoscope)
+        val numLuckMatch = Regex("- 총점: (.*)").find(horoscope)
+        val fourIdiomsLuckMatch = Regex("- 사자성어: (.*)").find(horoscope)
+
+        _todayLuck.value = todayLuckMatch?.groupValues?.get(1) ?: ""
+        _loveLuck.value = loveLuckMatch?.groupValues?.get(1) ?: ""
+        _wealthLuck.value = wealthLuckMatch?.groupValues?.get(1) ?: ""
+        _healthLuck.value = healthLuckMatch?.groupValues?.get(1) ?: ""
+        _num.value = numLuckMatch?.groupValues?.get(1)?.trim() ?: ""  // Trim any whitespace
+        _fourIdioms.value = fourIdiomsLuckMatch?.groupValues?.get(1) ?: ""
+
+        Log.d("SharedViewModel", "Parsed num: ${_num.value}")
     }
 }

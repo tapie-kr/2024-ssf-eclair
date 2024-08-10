@@ -1,5 +1,11 @@
 package com.tapie.eclair_card.navigation
 
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.with
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.*
@@ -27,6 +33,8 @@ sealed class Screen(val route: String) {
     object Taro : Screen("taro")
 }
 
+
+@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun Navigation() {
     val navController = rememberNavController()
@@ -41,13 +49,21 @@ fun Navigation() {
             }
         }
     ) { innerPadding ->
-        NavHost(navController = navController, startDestination = Screen.Logo.route, modifier = Modifier.padding(innerPadding)) {
-            composable(Screen.Logo.route) { LogoScreen(navController) }
-            composable(Screen.Starting.route) { StartingScreen(navController, sharedViewModel) }
-            composable(Screen.Loading.route) { LoadingScreen(navController, sharedViewModel) }
-            composable(Screen.Home.route) { HomeScreen(navController, sharedViewModel) }
-            composable(Screen.Luck.route) { LuckScreen(navController) }
-            composable(Screen.Taro.route) { TaroScreen(navController) }
+        AnimatedContent(
+            targetState = currentRoute,
+            transitionSpec = {
+                fadeIn(animationSpec = tween(1000)) with fadeOut(animationSpec = tween(500))
+            }
+        ) { targetRoute ->
+            NavHost(navController = navController, startDestination = Screen.Logo.route, modifier = Modifier.padding(innerPadding)) {
+                composable(Screen.Logo.route) { LogoScreen(navController) }
+                composable(Screen.Starting.route) { StartingScreen(navController, sharedViewModel) }
+                composable(Screen.Loading.route) { LoadingScreen(navController, sharedViewModel) }
+                composable(Screen.Home.route) { HomeScreen(navController, sharedViewModel) }
+                composable(Screen.Luck.route) { LuckScreen(navController, sharedViewModel) }
+                composable(Screen.Taro.route) { TaroScreen(navController, sharedViewModel) }
+            }
         }
     }
 }
+

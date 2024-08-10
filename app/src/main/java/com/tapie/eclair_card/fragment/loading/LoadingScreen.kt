@@ -47,12 +47,6 @@ fun LoadingScreen(navController: NavController, sharedViewModel: SharedViewModel
         contentAlignment = Alignment.Center,
         modifier = Modifier.fillMaxSize()
     ) {
-        AnimatedVisibility(
-            visible = visible,
-            enter = fadeIn(animationSpec = tween(1000)),
-            exit = fadeOut(animationSpec = tween(500))
-        ) {
-            LoadingIcon(modifier = Modifier.size(logoSize))
-        }
+        LoadingIcon(modifier = Modifier.size(logoSize))
     }
 }

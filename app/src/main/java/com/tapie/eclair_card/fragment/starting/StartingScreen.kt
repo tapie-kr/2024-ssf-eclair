@@ -33,11 +33,7 @@ fun StartingScreen(navController: NavController, sharedViewModel: SharedViewMode
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        AnimatedVisibility(
-            visible = visible,
-            enter = fadeIn(animationSpec = tween(1000)),
-            exit = fadeOut(animationSpec = tween(500))
-        ) {
+
             Column {
                 Text(
                     text = "당신의 이름을 알려주세요.",
@@ -70,9 +66,8 @@ fun StartingScreen(navController: NavController, sharedViewModel: SharedViewMode
                 CenteredTextButton(
                     props = ButtonProps(
                         text = "완료",
-                        icon = null,
                         buttonHeight = 53,
-                        buttonWidth = 345
+                        buttonWidth = 345,
                     ),
                     onClick = {
                         if (name.isNotEmpty() && birthDate.isNotEmpty()) {
@@ -86,4 +81,3 @@ fun StartingScreen(navController: NavController, sharedViewModel: SharedViewMode
             }
         }
     }
-}

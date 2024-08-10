@@ -13,7 +13,7 @@ data class CustomLuckTypography(
     val Luck_four_idioms : TextStyle,
     val LuckName: TextStyle,
     val Body : TextStyle,
-    val Button : TextStyle
+
 )
 
 val LuckTypography = CustomLuckTypography(
@@ -36,10 +36,5 @@ val LuckTypography = CustomLuckTypography(
         fontFamily = Pretendard,
         fontWeight = FontWeight.W400,
         fontSize = 20.sp
-    ),
-    Button = TextStyle(
-        fontFamily = Pretendard,
-        fontWeight = FontWeight.W600,
-        fontSize = 18.sp
     )
 )

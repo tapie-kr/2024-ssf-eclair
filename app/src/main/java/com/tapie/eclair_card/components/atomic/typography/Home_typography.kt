@@ -17,16 +17,21 @@ import com.tapie.eclair_card.components.atomic.Pretendard
 import org.w3c.dom.Text
 
 data class CustomHomeTypography(
+    val Home: TextStyle,
     val Name: TextStyle,
     val Title: TextStyle,
     val Todayluck : TextStyle,
     val Luck : TextStyle,
     val Luckname : TextStyle,
     val Body: TextStyle,
-    val Button: TextStyle
 )
 
 val HomeTypography = CustomHomeTypography(
+    Home = TextStyle(
+        fontFamily = Pretendard,
+        fontWeight = FontWeight.W700,
+        fontSize = 16.sp
+    ),
     Name = TextStyle(
         fontFamily = Pretendard,
         fontWeight = FontWeight.W700,
@@ -56,11 +61,6 @@ val HomeTypography = CustomHomeTypography(
         fontFamily = Pretendard,
         fontWeight = FontWeight.W500,
         fontSize = 16.sp
-    ),
-    Button = TextStyle(
-        fontFamily = Pretendard,
-        fontWeight = FontWeight.W600,
-        fontSize = 18.sp
     )
 )
 

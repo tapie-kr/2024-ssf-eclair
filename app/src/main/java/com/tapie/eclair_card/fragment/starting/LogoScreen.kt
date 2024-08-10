@@ -37,12 +37,6 @@ fun LogoScreen(navController: NavController) {
         contentAlignment = Alignment.Center,
         modifier = Modifier.fillMaxSize()
     ) {
-        AnimatedVisibility(
-            visible = visible,
-            enter = fadeIn(animationSpec = tween(1000)),
-            exit = fadeOut(animationSpec = tween(500))
-        ) {
-            LogoIcon(modifier = Modifier.size(logoSize))
-        }
+        LogoIcon(modifier = Modifier.size(logoSize))
     }
 }
