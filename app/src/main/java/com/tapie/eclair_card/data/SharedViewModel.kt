@@ -34,6 +34,16 @@ class SharedViewModel : ViewModel() {
     private val _fourIdioms = MutableLiveData<String>()
     val fourIdioms: LiveData<String> get() = _fourIdioms
 
+    private val _selectedCards = MutableLiveData<List<Int>>(emptyList())
+    val selectedCards: LiveData<List<Int>> get() = _selectedCards
+
+
+
+    fun setSelectedCards(cards: List<Int>) {
+        _selectedCards.value = cards
+    }
+
+
     fun setUserName(name: String) {
         _userName.value = name.trim() // Trim any whitespace
         Log.d("SharedViewModel", "UserName set to: ${_userName.value}")
@@ -43,6 +53,7 @@ class SharedViewModel : ViewModel() {
         _birthDate.value = date
         Log.d("SharedViewModel", "BirthDate set to: $date")
     }
+
 
     fun fetchHoroscope(onComplete: () -> Unit) {
         viewModelScope.launch {
@@ -73,5 +84,19 @@ class SharedViewModel : ViewModel() {
         _fourIdioms.value = fourIdiomsLuckMatch?.groupValues?.get(1) ?: ""
 
         Log.d("SharedViewModel", "Parsed num: ${_num.value}")
+    }
+
+
+    fun addSelectedCard(cardNumber: Int) {
+        val currentList = _selectedCards.value ?: emptyList()
+        if (currentList.size < 3) { // 최대 3개까지만 선택 가능
+            _selectedCards.value = currentList + cardNumber
+            Log.d("SharedViewModel", "Card selected: $cardNumber. Current selection: ${_selectedCards.value}")
+        }
+    }
+
+
+    fun resetTarotSelection() {
+        _selectedCards.value = emptyList()
     }
 }

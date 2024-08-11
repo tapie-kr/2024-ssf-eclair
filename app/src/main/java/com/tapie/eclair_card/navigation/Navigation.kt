@@ -6,6 +6,9 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.with
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.*
@@ -16,6 +19,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.tapie.eclair_card.components.nav.BottomNavigationBar
+import com.tapie.eclair_card.components.nav.LengthNavigationBar
 import com.tapie.eclair_card.fragment.home.HomeScreen
 import com.tapie.eclair_card.fragment.loading.LoadingScreen
 import com.tapie.eclair_card.fragment.luck.LuckScreen
@@ -23,6 +27,10 @@ import com.tapie.eclair_card.fragment.starting.LogoScreen
 import com.tapie.eclair_card.fragment.starting.StartingScreen
 import com.tapie.eclair_card.fragment.taro.TaroScreen
 import com.tapie.eclair_card.data.SharedViewModel
+import com.tapie.eclair_card.fragment.taro.FutureScreen
+import com.tapie.eclair_card.fragment.taro.PastScreen
+import com.tapie.eclair_card.fragment.taro.PresentScreen
+
 
 sealed class Screen(val route: String) {
     object Logo : Screen("logo")
@@ -31,8 +39,56 @@ sealed class Screen(val route: String) {
     object Home : Screen("home")
     object Luck : Screen("luck")
     object Taro : Screen("taro")
+    object Past : Screen("past")
+    object Present : Screen("present")
+    object Future : Screen("future")
 }
 
+
+//@OptIn(ExperimentalAnimationApi::class)
+//@Composable
+//fun Navigation() {
+//    val navController = rememberNavController()
+//    val sharedViewModel: SharedViewModel = viewModel()
+//    val navBackStackEntry by navController.currentBackStackEntryAsState()
+//    val currentRoute = navBackStackEntry?.destination?.route
+//    val showNavigationBar = currentRoute == Screen.Past.route || currentRoute == Screen.Present.route || currentRoute == Screen.Future.route
+//
+//    Scaffold(
+//        bottomBar = {
+//            if (currentRoute != Screen.Logo.route && currentRoute != Screen.Starting.route && currentRoute != Screen.Loading.route) {
+//                BottomNavigationBar(navController)
+//            }
+//        },
+//        content = { innerPadding ->
+//            AnimatedContent(
+//                targetState = currentRoute,
+//                transitionSpec = {
+//                    fadeIn(animationSpec = tween(1000)) with fadeOut(animationSpec = tween(500))
+//                }
+//            ) { targetRoute ->
+//                Row(modifier = Modifier.padding(innerPadding).fillMaxSize()) {
+//                    Box(modifier = Modifier.weight(1f)) {
+//                        NavHost(navController = navController, startDestination = Screen.Logo.route) {
+//                            composable(Screen.Logo.route) { LogoScreen(navController) }
+//                            composable(Screen.Starting.route) { StartingScreen(navController, sharedViewModel) }
+//                            composable(Screen.Loading.route) { LoadingScreen(navController, sharedViewModel) }
+//                            composable(Screen.Home.route) { HomeScreen(navController, sharedViewModel) }
+//                            composable(Screen.Luck.route) { LuckScreen(navController, sharedViewModel) }
+//                            composable(Screen.Taro.route) { TaroScreen(navController, sharedViewModel) }
+//                            composable(Screen.Past.route) { PastScreen(navController, sharedViewModel) }
+//                            composable(Screen.Present.route) { PresentScreen(navController, sharedViewModel) }
+//                            composable(Screen.Future.route) { FutureScreen(navController, sharedViewModel) }
+//                        }
+//                    }
+//                    if (showNavigationBar) {
+//                        LengthNavigationBar(navController = navController)
+//                    }
+//                }
+//            }
+//        }
+//    )
+//}
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
@@ -41,29 +97,42 @@ fun Navigation() {
     val sharedViewModel: SharedViewModel = viewModel()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
+    val showNavigationBar = currentRoute == Screen.Past.route || currentRoute == Screen.Present.route || currentRoute == Screen.Future.route
 
     Scaffold(
         bottomBar = {
             if (currentRoute != Screen.Logo.route && currentRoute != Screen.Starting.route && currentRoute != Screen.Loading.route) {
                 BottomNavigationBar(navController)
             }
-        }
-    ) { innerPadding ->
-        AnimatedContent(
-            targetState = currentRoute,
-            transitionSpec = {
-                fadeIn(animationSpec = tween(1000)) with fadeOut(animationSpec = tween(500))
+        },
+        content = { innerPadding ->
+            AnimatedContent(
+                targetState = currentRoute,
+                transitionSpec = {
+                    fadeIn(animationSpec = tween(1000)) with fadeOut(animationSpec = tween(500))
+                }
+            ) { targetRoute ->
+                Row(modifier = Modifier
+                    .padding(innerPadding)
+                    .fillMaxSize()) {
+                    Box(modifier = Modifier.weight(1f)) {
+                        NavHost(navController = navController, startDestination = Screen.Taro.route) {  // Taro 화면을 시작 화면으로 설정
+                            composable(Screen.Logo.route) { LogoScreen(navController) }
+                            composable(Screen.Starting.route) { StartingScreen(navController, sharedViewModel) }
+                            composable(Screen.Loading.route) { LoadingScreen(navController, sharedViewModel) }
+                            composable(Screen.Home.route) { HomeScreen(navController, sharedViewModel) }
+                            composable(Screen.Luck.route) { LuckScreen(navController, sharedViewModel) }
+                            composable(Screen.Taro.route) { TaroScreen(navController, sharedViewModel) }
+                            composable(Screen.Past.route) { PastScreen(navController, sharedViewModel) }
+                            composable(Screen.Present.route) { PresentScreen(navController, sharedViewModel) }
+                            composable(Screen.Future.route) { FutureScreen(navController, sharedViewModel) }
+                        }
+                    }
+                    if (showNavigationBar) {
+                        LengthNavigationBar(navController = navController)
+                    }
+                }
             }
-        ) { targetRoute ->
-            NavHost(navController = navController, startDestination = Screen.Logo.route, modifier = Modifier.padding(innerPadding)) {
-                composable(Screen.Logo.route) { LogoScreen(navController) }
-                composable(Screen.Starting.route) { StartingScreen(navController, sharedViewModel) }
-                composable(Screen.Loading.route) { LoadingScreen(navController, sharedViewModel) }
-                composable(Screen.Home.route) { HomeScreen(navController, sharedViewModel) }
-                composable(Screen.Luck.route) { LuckScreen(navController, sharedViewModel) }
-                composable(Screen.Taro.route) { TaroScreen(navController, sharedViewModel) }
-            }
         }
-    }
+    )
 }
-
