@@ -45,51 +45,6 @@ sealed class Screen(val route: String) {
 }
 
 
-//@OptIn(ExperimentalAnimationApi::class)
-//@Composable
-//fun Navigation() {
-//    val navController = rememberNavController()
-//    val sharedViewModel: SharedViewModel = viewModel()
-//    val navBackStackEntry by navController.currentBackStackEntryAsState()
-//    val currentRoute = navBackStackEntry?.destination?.route
-//    val showNavigationBar = currentRoute == Screen.Past.route || currentRoute == Screen.Present.route || currentRoute == Screen.Future.route
-//
-//    Scaffold(
-//        bottomBar = {
-//            if (currentRoute != Screen.Logo.route && currentRoute != Screen.Starting.route && currentRoute != Screen.Loading.route) {
-//                BottomNavigationBar(navController)
-//            }
-//        },
-//        content = { innerPadding ->
-//            AnimatedContent(
-//                targetState = currentRoute,
-//                transitionSpec = {
-//                    fadeIn(animationSpec = tween(1000)) with fadeOut(animationSpec = tween(500))
-//                }
-//            ) { targetRoute ->
-//                Row(modifier = Modifier.padding(innerPadding).fillMaxSize()) {
-//                    Box(modifier = Modifier.weight(1f)) {
-//                        NavHost(navController = navController, startDestination = Screen.Logo.route) {
-//                            composable(Screen.Logo.route) { LogoScreen(navController) }
-//                            composable(Screen.Starting.route) { StartingScreen(navController, sharedViewModel) }
-//                            composable(Screen.Loading.route) { LoadingScreen(navController, sharedViewModel) }
-//                            composable(Screen.Home.route) { HomeScreen(navController, sharedViewModel) }
-//                            composable(Screen.Luck.route) { LuckScreen(navController, sharedViewModel) }
-//                            composable(Screen.Taro.route) { TaroScreen(navController, sharedViewModel) }
-//                            composable(Screen.Past.route) { PastScreen(navController, sharedViewModel) }
-//                            composable(Screen.Present.route) { PresentScreen(navController, sharedViewModel) }
-//                            composable(Screen.Future.route) { FutureScreen(navController, sharedViewModel) }
-//                        }
-//                    }
-//                    if (showNavigationBar) {
-//                        LengthNavigationBar(navController = navController)
-//                    }
-//                }
-//            }
-//        }
-//    )
-//}
-
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun Navigation() {
@@ -112,11 +67,9 @@ fun Navigation() {
                     fadeIn(animationSpec = tween(1000)) with fadeOut(animationSpec = tween(500))
                 }
             ) { targetRoute ->
-                Row(modifier = Modifier
-                    .padding(innerPadding)
-                    .fillMaxSize()) {
+                Row(modifier = Modifier.padding(innerPadding).fillMaxSize()) {
                     Box(modifier = Modifier.weight(1f)) {
-                        NavHost(navController = navController, startDestination = Screen.Taro.route) {  // Taro 화면을 시작 화면으로 설정
+                        NavHost(navController = navController, startDestination = Screen.Logo.route) {
                             composable(Screen.Logo.route) { LogoScreen(navController) }
                             composable(Screen.Starting.route) { StartingScreen(navController, sharedViewModel) }
                             composable(Screen.Loading.route) { LoadingScreen(navController, sharedViewModel) }
@@ -136,3 +89,50 @@ fun Navigation() {
         }
     )
 }
+
+//@OptIn(ExperimentalAnimationApi::class)
+//@Composable
+//fun Navigation() {
+//    val navController = rememberNavController()
+//    val sharedViewModel: SharedViewModel = viewModel()
+//    val navBackStackEntry by navController.currentBackStackEntryAsState()
+//    val currentRoute = navBackStackEntry?.destination?.route
+//    val showNavigationBar = currentRoute == Screen.Past.route || currentRoute == Screen.Present.route || currentRoute == Screen.Future.route
+//
+//    Scaffold(
+//        bottomBar = {
+//            if (currentRoute != Screen.Logo.route && currentRoute != Screen.Starting.route && currentRoute != Screen.Loading.route) {
+//                BottomNavigationBar(navController)
+//            }
+//        },
+//        content = { innerPadding ->
+//            AnimatedContent(
+//                targetState = currentRoute,
+//                transitionSpec = {
+//                    fadeIn(animationSpec = tween(1000)) with fadeOut(animationSpec = tween(500))
+//                }
+//            ) { targetRoute ->
+//                Row(modifier = Modifier
+//                    .padding(innerPadding)
+//                    .fillMaxSize()) {
+//                    Box(modifier = Modifier.weight(1f)) {
+//                        NavHost(navController = navController, startDestination = Screen.Taro.route) {  // Taro 화면을 시작 화면으로 설정
+//                            composable(Screen.Logo.route) { LogoScreen(navController) }
+//                            composable(Screen.Starting.route) { StartingScreen(navController, sharedViewModel) }
+//                            composable(Screen.Loading.route) { LoadingScreen(navController, sharedViewModel) }
+//                            composable(Screen.Home.route) { HomeScreen(navController, sharedViewModel) }
+//                            composable(Screen.Luck.route) { LuckScreen(navController, sharedViewModel) }
+//                            composable(Screen.Taro.route) { TaroScreen(navController, sharedViewModel) }
+//                            composable(Screen.Past.route) { PastScreen(navController, sharedViewModel) }
+//                            composable(Screen.Present.route) { PresentScreen(navController, sharedViewModel) }
+//                            composable(Screen.Future.route) { FutureScreen(navController, sharedViewModel) }
+//                        }
+//                    }
+//                    if (showNavigationBar) {
+//                        LengthNavigationBar(navController = navController)
+//                    }
+//                }
+//            }
+//        }
+//    )
+//}
