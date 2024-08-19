@@ -26,6 +26,7 @@ import com.tapie.eclair_card.components.atomic.ButtonProps
 import com.tapie.eclair_card.components.atomic.CardBack
 import com.tapie.eclair_card.components.atomic.CenteredTextButton
 import com.tapie.eclair_card.components.atomic.LogoIcon
+import com.tapie.eclair_card.components.atomic.TextButton
 import com.tapie.eclair_card.components.atomic.typography.TaroTypography
 import com.tapie.eclair_card.data.SharedViewModel
 import com.tapie.eclair_card.navigation.Screen
@@ -182,7 +183,7 @@ fun TaroScreen(navController: NavController, sharedViewModel: SharedViewModel = 
                 if (selectedCards.size == 3) {
                     Spacer(modifier = Modifier.height(20.dp))
 
-                    CenteredTextButton(
+                    TextButton(
                         props = ButtonProps(text = "결과 보기", buttonWidth = 345, buttonHeight = 53),
                         onClick = { navController.navigate(Screen.Past.route) }
                     )

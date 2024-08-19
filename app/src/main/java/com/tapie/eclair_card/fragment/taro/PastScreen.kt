@@ -7,11 +7,13 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -39,18 +41,27 @@ import com.tapie.eclair_card.navigation.Screen
 
 @Composable
 fun PastScreen(navController: NavController, sharedViewModel: SharedViewModel = viewModel()) {
-
     val pastCardNumber = sharedViewModel.selectedCards.value?.getOrNull(0)
 
     Row(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.White) // 배경색 추가
     ) {
-        // 나머지 화면 요소들
+        // 빈 공간을 위한 Box
+        Box(
+            modifier = Modifier
+                .width(50.dp) // 기존 네비게이션 바의 너비만큼 빈 공간을 차지하게 함
+                .fillMaxHeight()
+        )
+
+        // Content area
         Column(
             modifier = Modifier
-                .weight(1f)
+                .weight(1f) // 남은 공간을 차지하게 함
                 .padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center // 세로 중앙 정렬
         ) {
             Box(
                 modifier = Modifier
@@ -91,39 +102,36 @@ fun PastScreen(navController: NavController, sharedViewModel: SharedViewModel = 
                     LogoIcon(modifier = Modifier.size(24.dp))
                 }
             }
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    // 여기에 선택된 카드 번호에 따른 이미지를 표시
-                    if (pastCardNumber != null) {
-                        DisplayCard(pastCardNumber, Modifier.size(230.dp, 380.dp))
-                    }
+
+            Spacer(modifier = Modifier.height(16.dp)) // 상단 텍스트와 카드 사이의 간격
+
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center, // 세로 중앙 정렬
+                modifier = Modifier.fillMaxSize()
+            ) {
+                // 여기에 선택된 카드 번호에 따른 이미지를 표시
+                if (pastCardNumber != null) {
+                    val interpretation =
+                        DisplayPastCard(pastCardNumber, Modifier.size(230.dp, 380.dp))
                     Spacer(modifier = Modifier.height(8.dp)) // 빈 공간 조정
 
                     Text(
-                        text = "과거", // 선택된 카드에 따라 텍스트 변경 가능
-                        style = TaroTypography.Time
+                        text = "과거",
+                        style = TaroTypography.Time,
+                        textAlign = TextAlign.Center, // 텍스트를 가로로 중앙 정렬
+                        modifier = Modifier.fillMaxWidth()
                     )
 
-                    Spacer(modifier = Modifier.height(4.dp)) // 빈 공간 조정
+                    Spacer(modifier = Modifier.height(4.dp))
 
                     Text(
-                        text = "여기에 타로 해석 써줘용", // 선택된 카드에 따라 텍스트 변경 가능
-                        style = TaroTypography.Explain
+                        text = interpretation,
+                        style = TaroTypography.Explain,
+                        modifier = Modifier.fillMaxWidth()
                     )
                 }
+            }
         }
     }
-}
-
-
-@Preview(showBackground = true, device = Devices.PIXEL_4)
-@Composable
-fun PastScreenPreview() {
-    val navController = rememberNavController()
-    val sharedViewModel = SharedViewModel().apply {
-        setSelectedCards(listOf(1, 2, 3)) // 가짜 데이터 설정
-    }
-
-    PastScreen(navController = navController, sharedViewModel = sharedViewModel)
 }

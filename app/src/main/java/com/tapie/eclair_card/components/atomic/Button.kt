@@ -5,8 +5,10 @@ import androidx.compose.foundation.layout.Arrangement
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -26,20 +28,25 @@ import androidx.compose.ui.unit.sp
 import com.tapie.eclair_card.R
 import com.tapie.eclair_card.ui.theme.GreenColor
 
+data class ButtonProps1(
+  val text: String,
+  val buttonHeight: Int,
+)
+
 data class ButtonProps(
   val text: String,
   val buttonHeight: Int,
-  val buttonWidth: Int
+  val buttonWidth: Int,
 )
 
-
 @Composable
-fun CenteredTextButton(props: ButtonProps, onClick: () -> Unit, modifier: Modifier = Modifier) {
+fun TextButton(props: ButtonProps, onClick: () -> Unit, modifier: Modifier = Modifier) {
   Button(
     onClick = onClick,
     modifier = modifier
       .padding(vertical = 4.dp)
-      .size(width = props.buttonWidth.dp, height = props.buttonHeight.dp),
+      .width(props.buttonWidth.dp)
+      .height(props.buttonHeight.dp), // Retain the height from props
     colors = ButtonDefaults.buttonColors(containerColor = GreenColor),
     shape = androidx.compose.foundation.shape.RoundedCornerShape(8.dp)
   ) {
@@ -47,7 +54,30 @@ fun CenteredTextButton(props: ButtonProps, onClick: () -> Unit, modifier: Modifi
       text = props.text,
       style = TextStyle(
         color = Color.Black,
-        fontSize = 18.sp, // 버튼 텍스트 크기
+        fontSize = 18.sp, // Button text size
+        fontWeight = FontWeight.W600
+      )
+    )
+  }
+}
+
+
+@Composable
+fun CenteredTextButton(props: ButtonProps1, onClick: () -> Unit, modifier: Modifier = Modifier) {
+  Button(
+    onClick = onClick,
+    modifier = modifier
+      .padding(vertical = 4.dp)
+      .fillMaxWidth() // Set the button to take the full width
+      .height(props.buttonHeight.dp), // Retain the height from props
+    colors = ButtonDefaults.buttonColors(containerColor = GreenColor),
+    shape = androidx.compose.foundation.shape.RoundedCornerShape(8.dp)
+  ) {
+    Text(
+      text = props.text,
+      style = TextStyle(
+        color = Color.Black,
+        fontSize = 18.sp, // Button text size
         fontWeight = FontWeight.W600
       )
     )
@@ -55,12 +85,13 @@ fun CenteredTextButton(props: ButtonProps, onClick: () -> Unit, modifier: Modifi
 }
 
 @Composable
-fun LeftTextRightIconButton(props: ButtonProps, onClick: () -> Unit) {
+fun LeftTextRightIconButton(props: ButtonProps1, onClick: () -> Unit) {
   Button(
     onClick = onClick,
     modifier = Modifier
       .padding(vertical = 4.dp)
-      .size(width = props.buttonWidth.dp, height = props.buttonHeight.dp),
+      .fillMaxWidth() // Set the button to take the full width
+      .height(props.buttonHeight.dp), // Retain the height from props
     colors = ButtonDefaults.buttonColors(containerColor = GreenColor),
     shape = RoundedCornerShape(8.dp)
   ) {

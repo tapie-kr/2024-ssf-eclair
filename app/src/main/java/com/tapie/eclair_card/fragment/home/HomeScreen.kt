@@ -28,6 +28,7 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
 import com.tapie.eclair_card.components.atomic.ButtonProps
+import com.tapie.eclair_card.components.atomic.ButtonProps1
 import com.tapie.eclair_card.components.atomic.LeftTextRightIconButton
 import com.tapie.eclair_card.ui.theme.BlackColor
 
@@ -97,10 +98,9 @@ fun HomeScreen(navController: NavController, sharedViewModel: SharedViewModel = 
         Spacer(modifier = Modifier.height(30.dp))  // 30dp 패딩 추가
 
         LeftTextRightIconButton(
-            props = ButtonProps(
+            props = ButtonProps1(
                 text = "운세 보러가기",
                 buttonHeight = 56,
-                buttonWidth = 346,
                 ),
             onClick = {
                 navController.navigate("luck") {
@@ -113,10 +113,9 @@ fun HomeScreen(navController: NavController, sharedViewModel: SharedViewModel = 
             }
         )
         LeftTextRightIconButton(
-            props = ButtonProps(
+            props = ButtonProps1(
                 text = "타로 보러가기",
-                buttonHeight = 56,
-                buttonWidth = 346,),
+                buttonHeight = 56,),
             onClick = {
                 navController.navigate("taro") {
                     popUpTo(navController.graph.startDestinationId) {
