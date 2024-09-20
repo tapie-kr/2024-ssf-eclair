@@ -138,52 +138,6 @@ fun FutureChoseIcon(modifier: Modifier= Modifier){
   )
 }
 
-@Composable
-fun BadIcon(modifier: Modifier= Modifier){
-  Image(
-    painter = painterResource(id = R.drawable.bad),
-    contentDescription = null,
-    modifier = modifier.size(30.dp)
-  )
-}
-
-@Composable
-fun VeryBadIcon(modifier: Modifier= Modifier){
-  Image(
-    painter = painterResource(id = R.drawable.very_bad),
-    contentDescription = null,
-    modifier = modifier.size(30.dp)
-  )
-}
-
-@Composable
-fun NormalIcon(modifier: Modifier= Modifier){
-  Image(
-    painter = painterResource(id = R.drawable.normal),
-    contentDescription = null,
-    modifier = modifier.size(30.dp)
-  )
-}
-
-@Composable
-fun SmileIcon(modifier: Modifier= Modifier){
-  Image(
-    painter = painterResource(id = R.drawable.smile),
-    contentDescription = null,
-    modifier = modifier.size(30.dp)
-  )
-}
-
-@Composable
-fun SmileLittleIcon(modifier: Modifier= Modifier){
-  Image(
-    painter = painterResource(id = R.drawable.smile_little),
-    contentDescription = null,
-    modifier = modifier.size(30.dp)
-  )
-}
-
-
 @Preview(showBackground = true)
 @Composable
 fun IconPreview() {

@@ -27,6 +27,7 @@ import com.tapie.eclair_card.ui.theme.LightPurpleColor
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.tooling.preview.Preview
 import com.tapie.eclair_card.components.atomic.ButtonProps
 import com.tapie.eclair_card.components.atomic.ButtonProps1
 import com.tapie.eclair_card.components.atomic.LeftTextRightIconButton
@@ -128,4 +129,3 @@ fun HomeScreen(navController: NavController, sharedViewModel: SharedViewModel = 
         )
     }
 }
-

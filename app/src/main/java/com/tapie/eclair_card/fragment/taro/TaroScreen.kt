@@ -45,7 +45,6 @@ fun TaroScreen(navController: NavController, sharedViewModel: SharedViewModel = 
     LazyColumn(
         modifier = Modifier
             .fillMaxSize(),
-            //.padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         item {

@@ -89,22 +89,6 @@ fun LuckScreen(navController: NavController, sharedViewModel: SharedViewModel = 
 
         Spacer(modifier = Modifier.height(8.dp)) // Add space between the image and the text
 
-//        Box(
-//            contentAlignment = Alignment.Center,
-//            modifier = Modifier
-//                .background(
-//                    color = GreenColor,
-//                    shape = RoundedCornerShape(50)
-//                )
-//                .padding(horizontal = 16.dp, vertical = 4.dp)
-//        ) {
-//            Text(
-//                text = fourIdioms,
-//                style = LuckTypography.Luck_four_idioms,
-//                //modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp)
-//            )
-//        }
-
         Box(
             contentAlignment = Alignment.BottomCenter,
             modifier = Modifier.wrapContentSize()
