@@ -9,7 +9,7 @@ import retrofit2.Response
 suspend fun getLuck(name: String, birthdate: String): String {
     Log.d("getLuck", "Requesting horoscope for: $name, $birthdate")
     val request = LuckRequest(
-        model = "gpt-4",
+        model = "gpt-4o",
         messages = listOf(
             Message(role = "system", content = "너는 상세하고 정확한 운세 정보를 제공하는 전문가야."),
             Message(role = "system", content = "사용자에게 불필요한 정보나 인사말 없이 운세 정보만을 제공해야 해."),
