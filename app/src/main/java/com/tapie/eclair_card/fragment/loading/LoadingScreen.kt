@@ -1,9 +1,5 @@
 package com.tapie.eclair_card.fragment.loading
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
@@ -21,7 +17,6 @@ import kotlinx.coroutines.delay
 
 @Composable
 fun LoadingScreen(navController: NavController, sharedViewModel: SharedViewModel = viewModel()) {
-    var visible by remember { mutableStateOf(true) }
     var isDataLoaded by remember { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {

@@ -1,9 +1,6 @@
 package com.tapie.eclair_card.fragment.starting
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
+
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
@@ -14,12 +11,10 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.tapie.eclair_card.components.atomic.CenteredTextButton
 import com.tapie.eclair_card.components.atomic.CustomTextInput
-import com.tapie.eclair_card.components.atomic.ButtonProps
 import com.tapie.eclair_card.components.atomic.ButtonProps1
 import com.tapie.eclair_card.components.atomic.typography.StartTypography
 import com.tapie.eclair_card.navigation.Screen
 import com.tapie.eclair_card.data.SharedViewModel
-import kotlinx.coroutines.delay
 
 
 @Composable
