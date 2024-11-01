@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 object RetrofitInstance {
-    private const val API_KEY = "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"
+    private const val API_KEY = "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"
 
     private val client = OkHttpClient.Builder()
         .connectTimeout(30, TimeUnit.SECONDS)

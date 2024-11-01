@@ -29,7 +29,7 @@ suspend fun getLuck(name: String, birthdate: String): String {
             Message(role = "user", content = "저의 이름은 $name 이고 생년월일은 $birthdate 입니다. 저의 오늘의 운세와 사자성어를 알려주세요.")
         ),
         max_tokens = 1000,
-        temperature = 0.9
+        temperature = 0.9,
     )
 
     return withContext(Dispatchers.IO) {
